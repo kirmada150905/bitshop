@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "573873224829",
+    "project_id": "bitshop324",
+    "storage_bucket": "bitshop324.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573873224829:android:5db462ce5950c773080514",
+        "android_client_info": {
+          "package_name": "com.bits.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJOTIhf2TyMWQTV7USBvS1IpLSdsmxdL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573873224829:android:721fd4aad32b52ef080514",
+        "android_client_info": {
+          "package_name": "com.bitshop.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJOTIhf2TyMWQTV7USBvS1IpLSdsmxdL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573873224829:android:f46cc796bfa7482e080514",
+        "android_client_info": {
+          "package_name": "com.example.bitshop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJOTIhf2TyMWQTV7USBvS1IpLSdsmxdL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
