@@ -6,13 +6,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreen extends ConsumerWidget {
-  LoginScreen({super.key});
+class CreateAccountScreen extends ConsumerWidget {
+  CreateAccountScreen({super.key});
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -22,7 +25,7 @@ class LoginScreen extends ConsumerWidget {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 Text(
-                  "Welcome Back!",
+                  "Create an Account",
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -32,7 +35,7 @@ class LoginScreen extends ConsumerWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Please log in to your account",
+                  "Please enter your details to create an account",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
@@ -41,7 +44,9 @@ class LoginScreen extends ConsumerWidget {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 50),
-                LoginField(hint: "email", controller: _emailController),
+                LoginField(hint: "Name", controller: _nameController),
+                SizedBox(height: 20),
+                LoginField(hint: "Email", controller: _emailController),
                 SizedBox(height: 20),
                 LoginField(hint: "Password", controller: _passController),
                 SizedBox(height: 30),
@@ -59,7 +64,7 @@ class LoginScreen extends ConsumerWidget {
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                   ),
-                  child: Text('Log In'),
+                  child: Text('Create Account'),
                 ),
                 SizedBox(height: 20),
                 HorizontalOrLine(label: "OR", height: 2),
@@ -68,7 +73,7 @@ class LoginScreen extends ConsumerWidget {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     foregroundColor: darkBlue,
-                    backgroundColor: cream,
+                    backgroundColor: Colors.white,
                     shadowColor: Colors.grey,
                     textStyle:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
@@ -82,7 +87,7 @@ class LoginScreen extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Log in with  -  ",
+                        "Sign up with  -  ",
                         style: TextStyle(color: darkBlue),
                       ),
                       SvgPicture.asset("assets/google.svg",
@@ -95,15 +100,13 @@ class LoginScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      "Don't have an Account? ",
+                      "Already have an Account? ",
                       style: TextStyle(fontSize: 18),
                     ),
                     TextButton(
-                        onPressed: () {
-                          context.push('/createAccount_screen');
-                        },
+                        onPressed: () => context.pop(),
                         child: Text(
-                          "Create One",
+                          "Log In",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ))
@@ -129,7 +132,7 @@ class LoginField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         label: Text(hint, style: textFieldTextStyle),
-        hintText: "enter your $hint",
+        hintText: "Enter your $hint",
         hintStyle: TextStyle(
           fontSize: 20,
           color: lightBlue,
