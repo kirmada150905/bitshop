@@ -1,4 +1,4 @@
-import 'package:bitshop/helpers/productGridBuilder.dart';
+import 'package:bitshop/Core/product_listing_widgets.dart';
 import 'package:bitshop/helpers/product_providers.dart';
 import 'package:bitshop/styles/colors.dart'; // Assuming you have a color palette file
 import 'package:flutter/material.dart';
@@ -43,7 +43,8 @@ class ProductsByCategoryScreen extends ConsumerWidget {
               );
             }
 
-            return ProductGridBuilder(products: products);
+            return SingleChildScrollView(
+                child: ProductListBuilder(products: products));
           },
           error: (error, stackTrace) {
             return Center(
