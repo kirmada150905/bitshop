@@ -16,6 +16,7 @@ class ProductsByCategoryScreen extends ConsumerWidget {
     final asyncValue = ref.watch(productsByCategoryProvider(categorySlug));
 
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

@@ -100,6 +100,7 @@ class CategoriesCarousel extends ConsumerWidget {
   }
 }
 
+
 class ProductGridBuilder extends ConsumerWidget {
   final List<Product> products;
 

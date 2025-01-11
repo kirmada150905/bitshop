@@ -48,19 +48,28 @@ extension StringExtensions on String {
 final productsByCategoryProvider =
     FutureProvider.family<List<Product>?, String>((ref, String slug) async {
   List<Product> products = [];
-  try {
-    Response response =
-        await dio.get("${server}/products/category/$slug");
-    List<dynamic> categoryProducts = response.data["products"];
-    if (categoryProducts.isNotEmpty) {
-      categoryProducts.forEach((value) {
-        products.add(Product.fromMap(value));
-      });
-    }
-    print(products);
-    return products;
-  } catch (e) {
-    print("Error fetching products for category: ${slug}");
-    return products;
+  Response response = await dio.get("${server}/products/category/$slug");
+  List<dynamic> categoryProducts = response.data["products"];
+  if (categoryProducts.isNotEmpty) {
+    categoryProducts.forEach((value) {
+      products.add(Product.fromMap(value));
+    });
   }
+  print(products);
+  return products;
+});
+
+final featuredProductsProvider = FutureProvider<List<Product>>((ref) async {
+  List<Product> products = [];
+  Response response = await dio.get("${server}/products");
+  List<dynamic> allProducts = response.data["products"];
+  if (allProducts.isNotEmpty) {
+    allProducts.forEach((value) {
+      try {
+        products.add(Product.fromMap(value));
+      } catch (e) {}
+    });
+  }
+  products.shuffle(Random());
+  return products.take(20).toList();
 });
