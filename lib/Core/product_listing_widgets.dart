@@ -19,58 +19,58 @@ class CategoriesCarousel extends ConsumerWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(16.0),
               ),
-              elevation: 4.0,
-              backgroundColor: Colors.grey[200],
+              backgroundColor: cream,
+              elevation: 6.0,
               children: categories.map((category) {
-                return Stack(
-                  children: [
-                    // Category Image
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: Image.network(
-                        category.thumbnail,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: double.infinity,
+                return Container(
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 8.0),
+                  decoration: BoxDecoration(
+                    color: cream,
+                    borderRadius: BorderRadius.circular(16.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 8.0,
+                        spreadRadius: 2.0,
+                        offset: const Offset(0, 4),
                       ),
-                    ),
-                    // Gradient Overlay
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.black.withOpacity(0.6),
-                            Colors.transparent,
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
+                    ],
+                  ),
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Image.network(
+                            category.thumbnail,
+                            fit: BoxFit.contain,
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: MediaQuery.of(context).size.height * 0.3,
+                          ),
                         ),
                       ),
-                    ),
-                    // Category Name
-                    Positioned(
-                      right: 16.0,
-                      bottom: 16.0,
-                      child: Text(
-                        category.category,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          shadows: [
-                            Shadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 3,
-                              color: Colors.black,
+                      Positioned(
+                        bottom: 5.0,
+                        left: 15.0,
+                        right: 15.0,
+                        child: Center(
+                          child: Text(
+                            category.category.toUpperCase(),
+                            style: TextStyle(
+                              color: darkBlue,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 5,
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               }).toList(),
             ));
