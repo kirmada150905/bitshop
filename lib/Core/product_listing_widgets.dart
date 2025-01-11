@@ -12,10 +12,12 @@ class CategoriesCarousel extends ConsumerWidget {
     return asyncValue.when(
       data: (categories) {
         return Container(
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width * 0.6,
             height: MediaQuery.of(context).size.height * 0.3,
             child: CarouselView(
-              itemExtent: MediaQuery.of(context).size.width - 50,
+              itemExtent: MediaQuery.of(context).size.width,
+              itemSnapping: true,
+              shrinkExtent: 0,
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               shape: RoundedRectangleBorder(
@@ -59,6 +61,7 @@ class CategoriesCarousel extends ConsumerWidget {
                         right: 15.0,
                         child: Center(
                           child: Text(
+                            textScaler: TextScaler.noScaling,
                             category.category.toUpperCase(),
                             style: TextStyle(
                               color: darkBlue,
