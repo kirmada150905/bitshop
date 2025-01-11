@@ -44,6 +44,8 @@ dependencies:
   cloud_firestore: ^5.6.1
   carousel_slider: ^5.0.0
   dio: ^5.7.0
+  sliding_up_panel: ^2.0.0+1
+  chips_choice: ^3.0.1
 
 dev_dependencies:
   flutter_test:

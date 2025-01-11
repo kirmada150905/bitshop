@@ -1,8 +1,10 @@
 import 'package:bitshop/Core/product_listing_widgets.dart';
 import 'package:bitshop/helpers/product_providers.dart';
-import 'package:bitshop/styles/colors.dart'; // Assuming you have a color palette file
+import 'package:bitshop/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class ProductsByCategoryScreen extends ConsumerWidget {
   final String categorySlug;
@@ -126,5 +128,3 @@ class ProductsByCategoryScreen extends ConsumerWidget {
     );
   }
 }
-
-

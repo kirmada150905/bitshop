@@ -49,7 +49,8 @@ final productsByCategoryProvider =
     FutureProvider.family<List<Product>?, String>((ref, String slug) async {
   List<Product> products = [];
   try {
-    Response response = await dio.get("${server}/products/category/$slug");
+    Response response =
+        await dio.get("${server}/products/category/$slug");
     List<dynamic> categoryProducts = response.data["products"];
     if (categoryProducts.isNotEmpty) {
       categoryProducts.forEach((value) {
