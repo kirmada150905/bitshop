@@ -35,7 +35,7 @@ Future<void> signInWithGoogle(BuildContext context) async {
         'uid': user?.uid,
       });
     }
-    context.go("/home_screen");
+    context.go("/core");
     EasyLoading.dismiss();
   } catch (e) {
     EasyLoading.showError(e.toString());

@@ -1,6 +1,6 @@
 import 'package:bitshop/Auth/emailAuth.dart';
 import 'package:bitshop/Auth/googleAuth.dart';
-import 'package:bitshop/helpers/helper_widgets.dart';
+import 'package:bitshop/helpers/horizontalORline.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:bitshop/styles/styles.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class LoginScreen extends ConsumerWidget {
   final TextEditingController _passController = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    _emailController.text = "deetymkk@gmail.com";
+    _emailController.text = "mohan.krishna.dt@gmail.com";
     _passController.text = "password";
     return Scaffold(
       body: Center(

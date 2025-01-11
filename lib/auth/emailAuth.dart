@@ -22,32 +22,14 @@ Future<void> emailSignIn(
         'uid': user?.uid,
       });
     }
-    context.go("/home_screen");
+    context.go("/core");
     EasyLoading.dismiss();
   } on FirebaseAuthException catch (e) {
-    EasyLoading.showError(e.toString());
-    if (e.code == 'user-not-found') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('No account found with this email.'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    } else if (e.code == 'wrong-password') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Incorrect password. Please try again.'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    } else if (e.code == 'invalid-email') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('The email address is not valid.'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
+    EasyLoading.dismiss();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(e.toString()),
+      backgroundColor: Colors.red,
+    ));
   } catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -86,7 +68,7 @@ Future<void> emailSignUp(String name, String emailAddress, String password,
       });
     }
 
-    context.go("/home_screen");
+    context.go("/core");
     EasyLoading.dismiss();
   } on FirebaseAuthException catch (e) {
     EasyLoading.dismiss();

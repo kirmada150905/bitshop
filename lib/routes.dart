@@ -1,6 +1,6 @@
 import 'package:bitshop/Auth/createAccount_screen.dart';
 import 'package:bitshop/Auth/login_screen.dart';
-import 'package:bitshop/Core/home_screen.dart';
+import 'package:bitshop/Core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,9 +19,9 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/home_screen',
+          path: '/core',
           builder: (BuildContext context, GoRouterState state) {
-            return HomeScreen();
+            return Core();
           },
         ),
       ],
