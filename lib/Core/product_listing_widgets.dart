@@ -2,6 +2,7 @@ import 'package:bitshop/helpers/product_providers.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoriesCarousel extends ConsumerWidget {
   const CategoriesCarousel({super.key});
@@ -12,9 +13,13 @@ class CategoriesCarousel extends ConsumerWidget {
     return asyncValue.when(
       data: (categories) {
         return Container(
-            width: MediaQuery.of(context).size.width * 0.6,
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.3,
             child: CarouselView(
+              onTap: (value) {
+                context.push("/productByCategory_screen",
+                    extra: categories[value].category);
+              },
               itemExtent: MediaQuery.of(context).size.width,
               itemSnapping: true,
               shrinkExtent: 0,
@@ -61,7 +66,6 @@ class CategoriesCarousel extends ConsumerWidget {
                         right: 15.0,
                         child: Center(
                           child: Text(
-                            textScaler: TextScaler.noScaling,
                             category.category.toUpperCase(),
                             style: TextStyle(
                               color: darkBlue,

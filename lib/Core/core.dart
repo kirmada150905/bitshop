@@ -16,11 +16,6 @@ class Core extends ConsumerWidget {
         physics: NeverScrollableScrollPhysics(),
         children: [
           CategoriesCarousel(),
-          ElevatedButton(
-              onPressed: () {
-                ref.refresh(categoriesProvider);
-              },
-              child: Text("Refresh categoriesProvider"))
         ],
       ),
     ));
