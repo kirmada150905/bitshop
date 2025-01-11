@@ -1,3 +1,5 @@
+import 'package:bitshop/Auth/emailAuth.dart';
+import 'package:bitshop/Auth/googleAuth.dart';
 import 'package:bitshop/helpers/helper_widgets.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:bitshop/styles/styles.dart';
@@ -12,6 +14,8 @@ class LoginScreen extends ConsumerWidget {
   final TextEditingController _passController = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    _emailController.text = "deetymkk@gmail.com";
+    _passController.text = "password";
     return Scaffold(
       body: Center(
         child: Padding(
@@ -45,8 +49,12 @@ class LoginScreen extends ConsumerWidget {
                 SizedBox(height: 20),
                 LoginField(hint: "Password", controller: _passController),
                 SizedBox(height: 30),
+                //email login button
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await emailSignIn(
+                        _emailController.text, _passController.text, context);
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: darkBlue,
@@ -64,8 +72,11 @@ class LoginScreen extends ConsumerWidget {
                 SizedBox(height: 20),
                 HorizontalOrLine(label: "OR", height: 2),
                 SizedBox(height: 20),
+                //google login button
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await signInWithGoogle(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: darkBlue,
                     backgroundColor: cream,

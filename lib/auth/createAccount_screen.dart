@@ -1,3 +1,5 @@
+import 'package:bitshop/Auth/emailAuth.dart';
+import 'package:bitshop/Auth/googleAuth.dart';
 import 'package:bitshop/helpers/helper_widgets.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:bitshop/styles/styles.dart';
@@ -49,9 +51,13 @@ class CreateAccountScreen extends ConsumerWidget {
                 LoginField(hint: "Email", controller: _emailController),
                 SizedBox(height: 20),
                 LoginField(hint: "Password", controller: _passController),
+                //create account button
                 SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await emailSignUp(_nameController.text,
+                        _emailController.text, _passController.text, context);
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: darkBlue,
@@ -70,10 +76,12 @@ class CreateAccountScreen extends ConsumerWidget {
                 HorizontalOrLine(label: "OR", height: 2),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await signInWithGoogle(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: darkBlue,
-                    backgroundColor: Colors.white,
+                    backgroundColor: cream,
                     shadowColor: Colors.grey,
                     textStyle:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
