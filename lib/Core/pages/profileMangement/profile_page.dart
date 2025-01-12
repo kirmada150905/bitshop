@@ -111,6 +111,7 @@ class ProfilePage extends ConsumerWidget {
                       label: "Log Out",
                       onTap: () async {
                         await FirebaseAuth.instance.signOut();
+                        context.pop();
                       },
                     ),
                   ],
