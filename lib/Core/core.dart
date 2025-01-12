@@ -17,7 +17,12 @@ class _CoreState extends ConsumerState {
   int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [BasePage(), ExplorePage(),CartPage(), ProfilePage()];
+    final List<Widget> pages = [
+      BasePage(),
+      ExplorePage(),
+      CartPage(),
+      ProfilePage()
+    ];
     return Scaffold(
         bottomNavigationBar: NavigationBar(
           shadowColor: darkBlue,
@@ -96,6 +101,6 @@ class _CoreState extends ConsumerState {
             ),
           ],
         ),
-        body: SafeArea(child: pages[currentPageIndex]));
+        body: pages[currentPageIndex]);
   }
 }

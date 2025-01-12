@@ -39,8 +39,6 @@ class CartItem {
 }
 
 class CartManager {
-  // final String? userId;
-  // CartManager({required this.userId});
 
   final String? userId = FirebaseAuth.instance.currentUser?.uid ?? "";
   CartManager();
