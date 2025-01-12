@@ -101,7 +101,9 @@ class ProfilePage extends ConsumerWidget {
                       context,
                       icon: Icons.help,
                       label: "Help & Support",
-                      onTap: () {},
+                      onTap: () {
+                        context.push("/tawkTo_page");
+                      },
                     ),
                     _buildProfileOption(
                       context,

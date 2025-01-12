@@ -2,6 +2,7 @@ import 'package:bitshop/Auth/createAccount_screen.dart';
 import 'package:bitshop/Auth/login_screen.dart';
 import 'package:bitshop/Core/core.dart';
 import 'package:bitshop/Core/pages/checkout_page.dart';
+import 'package:bitshop/Core/pages/tawkTo_page.dart';
 import 'package:bitshop/Core/pages/detailedProduct_page.dart';
 import 'package:bitshop/Core/pages/profileMangement/editProfile_page.dart';
 import 'package:bitshop/Core/productsByCategory_screen.dart';
@@ -14,8 +15,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        // return LoginScreen();
-        return Core();
+        return LoginScreen();
+        // return Core();
       },
       routes: <RouteBase>[
         GoRoute(
@@ -54,6 +55,12 @@ final GoRouter router = GoRouter(
           path: '/editProfile_page',
           builder: (BuildContext context, GoRouterState state) {
             return EditProfilePage();
+          },
+        ),
+        GoRoute(
+          path: '/tawkTo_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return TawkToPage();
           },
         ),
       ],
