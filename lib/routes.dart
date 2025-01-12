@@ -3,6 +3,7 @@ import 'package:bitshop/Auth/login_screen.dart';
 import 'package:bitshop/Core/core.dart';
 import 'package:bitshop/Core/pages/checkout_page.dart';
 import 'package:bitshop/Core/pages/detailedProduct_page.dart';
+import 'package:bitshop/Core/pages/profileMangement/editProfile_page.dart';
 import 'package:bitshop/Core/productsByCategory_screen.dart';
 import 'package:bitshop/helpers/models.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,12 @@ final GoRouter router = GoRouter(
           path: '/checkout_page',
           builder: (BuildContext context, GoRouterState state) {
             return CheckoutPage();
+          },
+        ),
+        GoRoute(
+          path: '/editProfile_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return EditProfilePage();
           },
         ),
       ],

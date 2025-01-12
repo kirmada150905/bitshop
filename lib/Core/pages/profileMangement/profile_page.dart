@@ -1,12 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bitshop/styles/colors.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -25,7 +29,6 @@ class ProfilePage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Profile Picture Section
               Container(
                 width: 120,
                 height: 120,
@@ -40,16 +43,22 @@ class ProfilePage extends ConsumerWidget {
                     ),
                   ],
                 ),
-                child: Icon(
-                  Icons.person,
-                  size: 80,
-                  color: cream,
-                ),
+                child: user?.photoURL != null
+                    ? ClipOval(
+                        child: Image.network(
+                          user!.photoURL!,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : Icon(
+                        Icons.person,
+                        size: 80,
+                        color: cream,
+                      ),
               ),
               const SizedBox(height: 16.0),
-              // Username Section
               Text(
-                "John Doe",
+                user?.displayName ?? "Guest User",
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -58,17 +67,24 @@ class ProfilePage extends ConsumerWidget {
               ),
               const SizedBox(height: 8.0),
               Text(
-                "johndoe@example.com",
+                user?.email ?? "No email available",
                 style: TextStyle(
                   fontSize: 16.0,
                   color: Colors.grey[700],
                 ),
               ),
               const SizedBox(height: 32.0),
-              // Actions Section
               Expanded(
                 child: ListView(
                   children: [
+                    _buildProfileOption(
+                      context,
+                      icon: Icons.person_3_outlined,
+                      label: "Edit Profile",
+                      onTap: () {
+                        context.push("/editProfile_page");
+                      },
+                    ),
                     _buildProfileOption(
                       context,
                       icon: Icons.shopping_cart,
@@ -83,12 +99,6 @@ class ProfilePage extends ConsumerWidget {
                     ),
                     _buildProfileOption(
                       context,
-                      icon: Icons.settings,
-                      label: "Settings",
-                      onTap: () {},
-                    ),
-                    _buildProfileOption(
-                      context,
                       icon: Icons.help,
                       label: "Help & Support",
                       onTap: () {},
@@ -97,8 +107,8 @@ class ProfilePage extends ConsumerWidget {
                       context,
                       icon: Icons.logout,
                       label: "Log Out",
-                      onTap: () {
-                        // Add logout logic here
+                      onTap: () async {
+                        await FirebaseAuth.instance.signOut();
                       },
                     ),
                   ],
