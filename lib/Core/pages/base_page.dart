@@ -20,7 +20,8 @@ class BasePage extends ConsumerWidget {
           physics: const NeverScrollableScrollPhysics(),
           children: [
             Text(
-              "Hi, ${user?.displayName?.split(" ")[0].toTitleCase()}",
+              textAlign: TextAlign.center,
+              "BITShop",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -52,6 +53,7 @@ class BasePage extends ConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Shop By Categories",
@@ -71,7 +73,8 @@ class BasePage extends ConsumerWidget {
             Divider(height: 2, color: darkBlue),
             const SizedBox(height: 20),
             Text(
-              "Featured for ${user?.displayName?.split(" ")[0].toTitleCase()}",
+              "Featured",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: darkBlue,
                 fontSize: 25,
@@ -96,7 +99,10 @@ class FeaturedProducts extends ConsumerWidget {
       return ProductGridBuilder(products: products);
     }, error: (error, StackTrace) {
       return Container(
-        child: Text(error.toString()),
+        child: Text(
+          error.toString(),
+          textAlign: TextAlign.center,
+        ),
       );
     }, loading: () {
       return Center(

@@ -130,7 +130,7 @@ class ProductGridBuilder extends ConsumerWidget {
               borderRadius: BorderRadius.circular(12.0),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: darkBlue.withOpacity(0.5),
                   blurRadius: 8.0,
                   spreadRadius: 2.0,
                   offset: const Offset(0, 4),
