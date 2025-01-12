@@ -1,7 +1,9 @@
 import 'package:bitshop/Auth/createAccount_screen.dart';
 import 'package:bitshop/Auth/login_screen.dart';
 import 'package:bitshop/Core/core.dart';
+import 'package:bitshop/Core/pages/detailedProduct_page.dart';
 import 'package:bitshop/Core/productsByCategory_screen.dart';
+import 'package:bitshop/helpers/models.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -31,6 +33,13 @@ final GoRouter router = GoRouter(
           builder: (BuildContext context, GoRouterState state) {
             final String categorySlug = state.extra as String;
             return ProductsByCategoryScreen(categorySlug: categorySlug);
+          },
+        ),
+        GoRoute(
+          path: '/detailedProduct_page',
+          builder: (BuildContext context, GoRouterState state) {
+            final Product product = state.extra as Product;
+            return DetailedProductPage(product: product);
           },
         ),
       ],

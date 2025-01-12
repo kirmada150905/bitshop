@@ -20,8 +20,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: router,
       theme: ThemeData(
-        primaryColor: darkBlue,
-        colorScheme: ColorScheme.fromSeed(seedColor: darkBlue),
+        primarySwatch: Colors.blue,
+        textTheme: ThemeData.light().textTheme.apply(
+              bodyColor: darkBlue,
+              displayColor: darkBlue,
+            ),
       ),
       builder: EasyLoading.init(),
     );

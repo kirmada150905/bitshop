@@ -1,9 +1,7 @@
 import 'package:bitshop/Core/pages/base_page.dart';
+import 'package:bitshop/Core/pages/cart_page.dart';
 import 'package:bitshop/Core/pages/explore_page.dart';
 import 'package:bitshop/Core/pages/profile_page.dart';
-import 'package:bitshop/Core/product_listing_widgets.dart';
-import 'package:bitshop/helpers/models.dart';
-import 'package:bitshop/helpers/product_providers.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,9 +17,11 @@ class _CoreState extends ConsumerState {
   int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [BasePage(), ExplorePage(), ProfilePage()];
+    final List<Widget> pages = [BasePage(), ExplorePage(),CartPage(), ProfilePage()];
     return Scaffold(
         bottomNavigationBar: NavigationBar(
+          shadowColor: darkBlue,
+          elevation: 4,
           backgroundColor: cream,
           height: 60,
           labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
@@ -60,6 +60,21 @@ class _CoreState extends ConsumerState {
               label: "Explore",
               selectedIcon: Icon(
                 Icons.explore,
+                size: 32,
+                color: darkBlue,
+              ),
+            ),
+            NavigationDestination(
+              icon: Tooltip(
+                message: "Cart",
+                child: Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 28,
+                ),
+              ),
+              label: "Cart",
+              selectedIcon: Icon(
+                Icons.shopping_cart,
                 size: 32,
                 color: darkBlue,
               ),

@@ -66,6 +66,16 @@ class BasePage extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 20),
+          Divider(height: 2, color: darkBlue),
+          const SizedBox(height: 20),
+          Text(
+            "Featured for ${user?.displayName?.split(" ")[0].toTitleCase()}",
+            style: TextStyle(
+              color: darkBlue,
+              fontSize: 25,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           FeaturedProducts(),
         ],
       ),

@@ -100,7 +100,6 @@ class CategoriesCarousel extends ConsumerWidget {
   }
 }
 
-
 class ProductGridBuilder extends ConsumerWidget {
   final List<Product> products;
 
@@ -121,74 +120,79 @@ class ProductGridBuilder extends ConsumerWidget {
       itemCount: products.length,
       itemBuilder: (context, index) {
         final product = products[index];
-        return Container(
-          decoration: BoxDecoration(
-            color: cream,
-            borderRadius: BorderRadius.circular(12.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 8.0,
-                spreadRadius: 2.0,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(12.0),
-                  ),
-                  child: Image.network(
-                    product.thumbnail,
-                    fit: BoxFit.cover,
+        return GestureDetector(
+          onTap: () {
+            context.push("/detailedProduct_page", extra: product);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: cream,
+              borderRadius: BorderRadius.circular(12.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 8.0,
+                  spreadRadius: 2.0,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(12.0),
+                    ),
+                    child: Image.network(
+                      product.thumbnail,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.title,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold,
-                        color: darkBlue,
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.title,
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                          color: darkBlue,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4.0),
-                    Text(
-                      '\$${product.price.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.teal,
-                      ),
-                    ),
-                    const SizedBox(height: 4.0),
-                    Row(
-                      children: List.generate(
-                        5,
-                        (starIndex) => Icon(
-                          Icons.star,
-                          size: 14.0,
-                          color: starIndex < product.rating
-                              ? Colors.amber
-                              : Colors.grey.shade300,
+                      const SizedBox(height: 4.0),
+                      Text(
+                        '\$${product.price.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.teal,
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 4.0),
+                      Row(
+                        children: List.generate(
+                          5,
+                          (starIndex) => Icon(
+                            Icons.star,
+                            size: 14.0,
+                            color: starIndex < product.rating
+                                ? Colors.amber
+                                : Colors.grey.shade300,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
