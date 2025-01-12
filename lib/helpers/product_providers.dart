@@ -29,9 +29,7 @@ final categoriesProvider = FutureProvider<List<Product>>((ref) async {
           ];
         }
       }
-    } catch (e) {
-      print("Error fetching products for category: ${slug}");
-    }
+    } catch (e) {}
   });
 
   return products;
@@ -55,7 +53,6 @@ final productsByCategoryProvider =
       products.add(Product.fromMap(value));
     });
   }
-  print(products);
   return products;
 });
 
@@ -72,4 +69,27 @@ final featuredProductsProvider = FutureProvider<List<Product>>((ref) async {
   }
   products.shuffle(Random());
   return products.take(20).toList();
+});
+
+final exploreProductsProvider = FutureProvider<List<Product>>((ref) async {
+  List<Product> products = [];
+  Response response = await dio.get("${server}/products");
+  List<dynamic> allProducts = response.data["products"];
+  if (allProducts.isNotEmpty) {
+    allProducts.forEach((value) {
+      try {
+        products.add(Product.fromMap(value));
+      } catch (e) {
+        print(e);
+      }
+    });
+  }
+  products.shuffle(Random());
+  return products.take(20).toList();
+});
+
+final categorySlugsProvider = FutureProvider<List<String>>((ref) async {
+  Response response = await dio.get("${server}/products/category-list");
+  List<String> categorySlugs = List<String>.from(response.data as List);
+  return categorySlugs;
 });

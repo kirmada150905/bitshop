@@ -13,71 +13,74 @@ class BasePage extends ConsumerWidget {
     User? user = FirebaseAuth.instance.currentUser;
 
     return SingleChildScrollView(
-      child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          Text(
-            "Hi, ${user?.displayName?.split(" ")[0].toTitleCase()}",
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: darkBlue,
+      child: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            Text(
+              "Hi, ${user?.displayName?.split(" ")[0].toTitleCase()}",
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: darkBlue,
+              ),
             ),
-          ),
-          const Divider(
-            height: 2,
-            color: Colors.grey,
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-            decoration: BoxDecoration(
-              color: darkBlue,
-              borderRadius: BorderRadius.circular(16.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 8.0,
-                  spreadRadius: 2.0,
-                  offset: const Offset(0, 4),
-                ),
-              ],
+            const Divider(
+              height: 2,
+              color: Colors.grey,
             ),
-            child: ListView(
-              padding: const EdgeInsets.all(20),
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "Shop By Categories",
-                      style: TextStyle(
-                        color: cream,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
+            Container(
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+              decoration: BoxDecoration(
+                color: darkBlue,
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8.0,
+                    spreadRadius: 2.0,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: ListView(
+                padding: const EdgeInsets.all(20),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Shop By Categories",
+                        style: TextStyle(
+                          color: cream,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                CategoriesCarousel(),
-              ],
+                    ],
+                  ),
+                  CategoriesCarousel(),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Divider(height: 2, color: darkBlue),
-          const SizedBox(height: 20),
-          Text(
-            "Featured for ${user?.displayName?.split(" ")[0].toTitleCase()}",
-            style: TextStyle(
-              color: darkBlue,
-              fontSize: 25,
-              fontWeight: FontWeight.w600,
+            const SizedBox(height: 20),
+            Divider(height: 2, color: darkBlue),
+            const SizedBox(height: 20),
+            Text(
+              "Featured for ${user?.displayName?.split(" ")[0].toTitleCase()}",
+              style: TextStyle(
+                color: darkBlue,
+                fontSize: 25,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          FeaturedProducts(),
-        ],
+            FeaturedProducts(),
+          ],
+        ),
       ),
     );
   }

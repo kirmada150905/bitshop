@@ -47,6 +47,9 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   chips_choice: ^3.0.1
   progress_bar_countdown: ^0.0.3
+  flutter_screen_capture: ^1.2.2
+  screenshot: ^3.0.0
+  share: ^2.0.4
 
 dev_dependencies:
   flutter_test:
