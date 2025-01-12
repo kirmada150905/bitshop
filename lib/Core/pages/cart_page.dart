@@ -2,6 +2,8 @@ import 'package:bitshop/helpers/cart_manger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bitshop/styles/colors.dart';
+import 'package:go_router/go_router.dart';
+import 'package:progress_bar_countdown/progress_bar_countdown.dart';
 
 class CartPage extends ConsumerWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -79,6 +81,65 @@ class CartPage extends ConsumerWidget {
                       IconButton(
                         icon: const Icon(Icons.delete),
                         onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Item removed from cart',
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          final cartManager =
+                                              ref.read(cartManagerProvider);
+                                          cartManager.addToCart(item.copyWith(
+                                              quantity: item.quantity));
+                                          ScaffoldMessenger.of(context)
+                                              .hideCurrentSnackBar();
+                                        },
+                                        child: Text(
+                                          "undo?",
+                                          style: TextStyle(
+                                            color: cream,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ProgressBarCountdown(
+                                    hideText: true,
+                                    initialDuration: Duration(seconds: 2),
+                                    progressColor: cream,
+                                    progressBackgroundColor: darkBlue,
+                                    height: 2,
+                                    countdownDirection:
+                                        ProgressBarCountdownAlignment.left,
+                                    controller:
+                                        ProgressBarCountdownController(),
+                                    autoStart: true,
+                                  )
+                                ],
+                              ),
+                              // duration: Duration(seconds: 2),
+                              backgroundColor: darkBlue,
+                              behavior: SnackBarBehavior.floating,
+                              elevation: 20.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              width: MediaQuery.of(context).size.width * 0.8,
+                            ),
+                          );
                           ref.read(cartManagerProvider).removeFromCart(item.id);
                         },
                         color: darkBlue,
@@ -122,8 +183,10 @@ class CartPage extends ConsumerWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: darkBlue,
-                  ),
+                      backgroundColor: darkBlue,
+                      foregroundColor: cream,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
                   child: const Text('Checkout'),
                 ),
               ],

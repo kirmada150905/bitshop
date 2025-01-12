@@ -46,6 +46,7 @@ dependencies:
   dio: ^5.7.0
   sliding_up_panel: ^2.0.0+1
   chips_choice: ^3.0.1
+  progress_bar_countdown: ^0.0.3
 
 dev_dependencies:
   flutter_test:

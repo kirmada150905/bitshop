@@ -1,6 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CartItem {
   final String id;
@@ -35,6 +36,22 @@ class CartItem {
       'price': price,
       'quantity': quantity,
     };
+  }
+
+  CartItem copyWith({
+    String? id,
+    String? title,
+    String? thumbnail,
+    double? price,
+    int? quantity,
+  }) {
+    return CartItem(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      thumbnail: thumbnail ?? this.thumbnail,
+      price: price ?? this.price,
+      quantity: quantity ?? this.quantity,
+    );
   }
 }
 
