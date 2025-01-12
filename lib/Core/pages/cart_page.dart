@@ -130,7 +130,6 @@ class CartPage extends ConsumerWidget {
                                   )
                                 ],
                               ),
-                              // duration: Duration(seconds: 2),
                               backgroundColor: darkBlue,
                               behavior: SnackBarBehavior.floating,
                               elevation: 20.0,
@@ -178,9 +177,7 @@ class CartPage extends ConsumerWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Proceed to Checkout!')),
-                    );
+                    context.push("/checkout_page");
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: darkBlue,
