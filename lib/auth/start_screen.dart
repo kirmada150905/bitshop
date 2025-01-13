@@ -18,19 +18,38 @@ class StartScreen extends ConsumerWidget {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
           child: SingleChildScrollView(
             child: ListView(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               children: [
+                Text(
+                  "Welcome to BITShop",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: darkBlue,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Your one-stop shop to discover and sell amazing products!",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[700],
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
                 Image.asset("assets/image.png", height: 350),
                 SizedBox(height: 50),
                 LoginButton(
                   onPressed: () async {},
                   foregroundColor: cream,
                   backgroundColor: darkBlue,
-                  text: 'Buy Products',
+                  text: 'Discover Products',
                 ),
                 SizedBox(height: 10),
                 HorizontalOrLine(label: "OR", height: 2),

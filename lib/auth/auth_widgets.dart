@@ -48,7 +48,7 @@ class LoginField extends StatelessWidget {
 }
 
 class LoginButton extends StatelessWidget {
-  Function onPressed;
+  VoidCallback? onPressed;
   Color backgroundColor;
   Color foregroundColor;
   String text;
@@ -56,23 +56,20 @@ class LoginButton extends StatelessWidget {
   String? svgPath;
   double? verticalPadding;
 
-  LoginButton({
-    super.key,
-    required this.onPressed,
-    required this.foregroundColor,
-    required this.backgroundColor,
-    required this.text,
-    this.textColor,
-    this.svgPath,
-    this.verticalPadding
-  });
+  LoginButton(
+      {super.key,
+      required this.onPressed,
+      required this.foregroundColor,
+      required this.backgroundColor,
+      required this.text,
+      this.textColor,
+      this.svgPath,
+      this.verticalPadding});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () async {
-        await signInWithGoogle(context);
-      },
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         foregroundColor: foregroundColor,
         backgroundColor: backgroundColor,
@@ -82,7 +79,8 @@ class LoginButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: verticalPadding ?? 20),
+        padding: EdgeInsets.symmetric(
+            horizontal: 10, vertical: verticalPadding ?? 20),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

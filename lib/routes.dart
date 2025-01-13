@@ -16,7 +16,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return StartScreen();
+        // return StartScreen();
+        return LoginScreen();
         // return Core();
       },
       routes: <RouteBase>[

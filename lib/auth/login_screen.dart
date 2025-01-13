@@ -1,9 +1,12 @@
 import 'package:bitshop/Auth/auth_widgets.dart';
 import 'package:bitshop/Auth/emailAuth.dart';
 import 'package:bitshop/Auth/googleAuth.dart';
+import 'package:bitshop/Core/pages/profileMangement/editProfile_page.dart';
 import 'package:bitshop/helpers/horizontalORline.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:bitshop/styles/styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -55,6 +58,29 @@ class LoginScreen extends ConsumerWidget {
                   onPressed: () async {
                     await emailSignIn(
                         _emailController.text, _passController.text, context);
+                    User? firebaseUser = FirebaseAuth.instance.currentUser;
+                    DocumentSnapshot<Map<String, dynamic>> document =
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(firebaseUser?.uid)
+                            .get();
+
+                    QuerySnapshot<Map<String, dynamic>> cart =
+                        await FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(firebaseUser?.uid)
+                            .collection("cart")
+                            .get();
+
+                    if (document.exists) {
+                      print("Document Data: ${document.data()}");
+                    } else {
+                      print("No such document!");
+                    }
+                    // cart.docs.forEach((doc) {
+                    //   print("doc");
+                    //   print(doc.data());
+                    // });
                   },
                   foregroundColor: Colors.white,
                   backgroundColor: darkBlue,
