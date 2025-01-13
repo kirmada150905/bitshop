@@ -1,3 +1,4 @@
+import 'package:bitshop/Auth/auth_widgets.dart';
 import 'package:bitshop/Auth/emailAuth.dart';
 import 'package:bitshop/Auth/googleAuth.dart';
 import 'package:bitshop/helpers/horizontalORline.dart';
@@ -50,56 +51,28 @@ class LoginScreen extends ConsumerWidget {
                 LoginField(hint: "Password", controller: _passController),
                 SizedBox(height: 30),
                 //email login button
-                ElevatedButton(
+                LoginButton(
                   onPressed: () async {
                     await emailSignIn(
                         _emailController.text, _passController.text, context);
                   },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: darkBlue,
-                    shadowColor: Colors.grey,
-                    textStyle:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  ),
-                  child: Text('Log In'),
+                  foregroundColor: Colors.white,
+                  backgroundColor: darkBlue,
+                  text: 'Log in',
                 ),
                 SizedBox(height: 10),
                 HorizontalOrLine(label: "OR", height: 2),
                 SizedBox(height: 10),
                 //google login button
-                ElevatedButton(
+                LoginButton(
                   onPressed: () async {
                     await signInWithGoogle(context);
                   },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: darkBlue,
-                    backgroundColor: cream,
-                    shadowColor: Colors.grey,
-                    textStyle:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Log in with  -  ",
-                        style: TextStyle(color: darkBlue),
-                      ),
-                      SvgPicture.asset("assets/google.svg",
-                          width: 35, height: 35),
-                    ],
-                  ),
+                  backgroundColor: cream,
+                  foregroundColor: darkBlue,
+                  text: "Log in with  -  ",
+                  svgPath: "assets/google.svg",
+                  verticalPadding: 10,
                 ),
                 SizedBox(height: 15),
                 Row(
@@ -122,41 +95,6 @@ class LoginScreen extends ConsumerWidget {
                 )
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LoginField extends StatelessWidget {
-  final String hint;
-  final TextEditingController controller;
-  const LoginField({super.key, required this.hint, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        label: Text(hint, style: textFieldTextStyle),
-        hintText: "enter your $hint",
-        hintStyle: TextStyle(
-          fontSize: 20,
-          color: lightBlue,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(
-            color: lightBlue,
-            width: 1.5,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(
-            color: darkBlue,
-            width: 2,
           ),
         ),
       ),
