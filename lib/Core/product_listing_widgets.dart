@@ -261,7 +261,7 @@ class ProductListBuilder extends ConsumerWidget {
                             color: darkBlue,
                           ),
                           maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                          overflow: TextOverflow.ellipsis, 
                         ),
                         const SizedBox(height: 6.0),
                         Text(

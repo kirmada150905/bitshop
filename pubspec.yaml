@@ -53,6 +53,7 @@ dependencies:
   image_picker: ^1.1.2
   firebase_storage: ^12.4.0
   flutter_tawk: ^0.1.0
+  flutter_native_splash: ^2.4.4
 
 dev_dependencies:
   flutter_test:
@@ -106,3 +107,18 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/image.png
+  android: true
+  ios: true
+  web: true
+  android_gravity: center
+  ios_content_mode: center
+  branding: 
+    text: "BITShop"
+    text_color: "#213555"
+    text_size: 20
+    font_family: assets/fonts/CustomFont.ttf
