@@ -214,88 +214,93 @@ class ProductListBuilder extends ConsumerWidget {
       itemCount: products.length,
       itemBuilder: (context, index) {
         final product = products[index];
-        return Container(
-          margin: const EdgeInsets.only(bottom: 16.0),
-          decoration: BoxDecoration(
-            color: cream,
-            borderRadius: BorderRadius.circular(12.0),
-            boxShadow: [
-              BoxShadow(
-                color: beige.withOpacity(0.5),
-                blurRadius: 8.0,
-                spreadRadius: 2.0,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              // Product Image
-              ClipRRect(
-                borderRadius: const BorderRadius.horizontal(
-                  left: Radius.circular(12.0),
+        return GestureDetector(
+          onTap: () {
+            context.push("/detailedProduct_page", extra: product);
+          },
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 16.0),
+            decoration: BoxDecoration(
+              color: cream,
+              borderRadius: BorderRadius.circular(12.0),
+              boxShadow: [
+                BoxShadow(
+                  color: beige.withOpacity(0.5),
+                  blurRadius: 8.0,
+                  spreadRadius: 2.0,
+                  offset: const Offset(0, 4),
                 ),
-                child: Image.network(
-                  product.thumbnail,
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: 120.0,
-                ),
-              ),
-              // Product Details
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.title,
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          color: darkBlue,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 6.0),
-                      Text(
-                        '\$${product.price.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.teal,
-                        ),
-                      ),
-                      const SizedBox(height: 6.0),
-                      Row(
-                        children: List.generate(
-                          5,
-                          (starIndex) => Icon(
-                            Icons.star,
-                            size: 14.0,
-                            color: starIndex < product.rating
-                                ? Colors.amber
-                                : Colors.grey.shade300,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 6.0),
-                      Text(
-                        product.description,
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.grey.shade600,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+              ],
+            ),
+            child: Row(
+              children: [
+                // Product Image
+                ClipRRect(
+                  borderRadius: const BorderRadius.horizontal(
+                    left: Radius.circular(12.0),
+                  ),
+                  child: Image.network(
+                    product.thumbnail,
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    height: 120.0,
                   ),
                 ),
-              ),
-            ],
+                // Product Details
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.title,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: darkBlue,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis, 
+                        ),
+                        const SizedBox(height: 6.0),
+                        Text(
+                          '\$${product.price.toStringAsFixed(2)}',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.teal,
+                          ),
+                        ),
+                        const SizedBox(height: 6.0),
+                        Row(
+                          children: List.generate(
+                            5,
+                            (starIndex) => Icon(
+                              Icons.star,
+                              size: 14.0,
+                              color: starIndex < product.rating
+                                  ? Colors.amber
+                                  : Colors.grey.shade300,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 6.0),
+                        Text(
+                          product.description,
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            color: Colors.grey.shade600,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

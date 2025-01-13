@@ -25,6 +25,7 @@ class LoginScreen extends ConsumerWidget {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               children: [
+                Image.asset("assets/image.png", height: 350),
                 Text(
                   "Welcome Back!",
                   style: TextStyle(
@@ -34,7 +35,6 @@ class LoginScreen extends ConsumerWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 10),
                 Text(
                   "Please log in to your account",
                   style: TextStyle(
@@ -69,9 +69,9 @@ class LoginScreen extends ConsumerWidget {
                   ),
                   child: Text('Log In'),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 HorizontalOrLine(label: "OR", height: 2),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 //google login button
                 ElevatedButton(
                   onPressed: () async {

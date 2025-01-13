@@ -14,6 +14,7 @@ class CartPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Your Cart',
           style: TextStyle(color: cream),
