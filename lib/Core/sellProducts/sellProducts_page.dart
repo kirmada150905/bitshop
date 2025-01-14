@@ -1,6 +1,9 @@
+import 'package:bitshop/Core/sellProducts/upload_products.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class SellProductsPage extends ConsumerWidget {
   const SellProductsPage({super.key});
@@ -13,6 +16,7 @@ class SellProductsPage extends ConsumerWidget {
     final TextEditingController productDescriptionController =
         TextEditingController();
 
+    final image = ref.watch(ProductImageProvider);
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -20,7 +24,6 @@ class SellProductsPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
               Center(
                 child: Text(
                   "Sell a Product",
@@ -33,8 +36,6 @@ class SellProductsPage extends ConsumerWidget {
               ),
               const Divider(height: 2, color: Colors.grey),
               const SizedBox(height: 20),
-
-              
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -52,7 +53,6 @@ class SellProductsPage extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
                     Text(
                       "Product Name",
                       style: TextStyle(
@@ -77,8 +77,6 @@ class SellProductsPage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-
-                    
                     Text(
                       "Product Price",
                       style: TextStyle(
@@ -104,8 +102,6 @@ class SellProductsPage extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-
-                    
                     Text(
                       "Product Description",
                       style: TextStyle(
@@ -134,11 +130,17 @@ class SellProductsPage extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              
+              image.image != null ? Image.file(image.image!) : SizedBox(),
               TextButton.icon(
-                onPressed: () {
-                  
+                onPressed: () async {
+                  final picker = ImagePicker();
+                  XFile? pickfile =
+                      await picker.pickImage(source: ImageSource.gallery);
+                  if (pickfile != null) {
+                    ref
+                        .read(ProductImageProvider.notifier)
+                        .setImage(File(pickfile!.path));
+                  }
                 },
                 icon: Icon(Icons.upload, color: darkBlue),
                 label: Text(
@@ -156,12 +158,9 @@ class SellProductsPage extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
-                    
+                  onPressed: () async {
                     String name = productNameController.text.trim();
                     String price = productPriceController.text.trim();
                     String description =
@@ -173,7 +172,13 @@ class SellProductsPage extends ConsumerWidget {
                       print("Product Name: $name");
                       print("Product Price: $price");
                       print("Product Description: $description");
-
+                      await uploadProduct(
+                          name,
+                          price,
+                          description,
+                          (ref
+                              .read(ProductImageProvider.notifier)
+                              .giveImage()!));
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text("Product submitted successfully!"),
@@ -210,3 +215,25 @@ class SellProductsPage extends ConsumerWidget {
     );
   }
 }
+
+class ProductImage {
+  File? image;
+  ProductImage({this.image});
+}
+
+class ProductImageNotifier extends StateNotifier<ProductImage> {
+  ProductImageNotifier() : super(ProductImage());
+
+  void setImage(File selectedImage) {
+    state = ProductImage(image: selectedImage);
+  }
+
+  File? giveImage() {
+    return state.image;
+  }
+}
+
+final ProductImageProvider =
+    StateNotifierProvider<ProductImageNotifier, ProductImage>((ref) {
+  return ProductImageNotifier();
+});

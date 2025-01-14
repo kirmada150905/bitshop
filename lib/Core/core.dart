@@ -2,7 +2,7 @@ import 'package:bitshop/Core/pages/base_page.dart';
 import 'package:bitshop/Core/pages/cart_page.dart';
 import 'package:bitshop/Core/pages/explore_page.dart';
 import 'package:bitshop/Core/pages/profileMangement/profile_page.dart';
-import 'package:bitshop/Core/pages/sellProducts_page.dart';
+import 'package:bitshop/Core/sellProducts/sellProducts_page.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
