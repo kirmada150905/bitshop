@@ -1,6 +1,5 @@
 import 'package:bitshop/Auth/createAccount_screen.dart';
 import 'package:bitshop/Auth/login_screen.dart';
-import 'package:bitshop/Auth/start_screen.dart';
 import 'package:bitshop/Core/core.dart';
 import 'package:bitshop/Core/pages/checkout_page.dart';
 import 'package:bitshop/Core/pages/tawkTo_page.dart';
@@ -16,8 +15,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return StartScreen();
         // return Core();
+        return LoginScreen();
       },
       routes: <RouteBase>[
         GoRoute(

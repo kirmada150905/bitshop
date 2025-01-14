@@ -48,7 +48,7 @@ class LoginField extends StatelessWidget {
 }
 
 class LoginButton extends StatelessWidget {
-  Function onPressed;
+  VoidCallback? onPressed;
   Color backgroundColor;
   Color foregroundColor;
   String text;
@@ -70,9 +70,7 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () async {
-        await signInWithGoogle(context);
-      },
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         foregroundColor: foregroundColor,
         backgroundColor: backgroundColor,
