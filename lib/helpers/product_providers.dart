@@ -93,3 +93,16 @@ final categorySlugsProvider = FutureProvider<List<String>>((ref) async {
   List<String> categorySlugs = List<String>.from(response.data as List);
   return categorySlugs;
 });
+
+class DetailedProductNotifier extends StateNotifier<Product?> {
+  DetailedProductNotifier() : super(null);
+
+  void setDetailedProduct(Product product) {
+    state = product;
+  }
+}
+
+final DeatiledProductProvider =
+    StateNotifierProvider<DetailedProductNotifier, Product?>((ref) {
+  return DetailedProductNotifier();
+});

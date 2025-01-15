@@ -122,7 +122,10 @@ class ProductGridBuilder extends ConsumerWidget {
         final product = products[index];
         return GestureDetector(
           onTap: () {
-            context.push("/detailedProduct_page", extra: product);
+            ref
+                .read(DeatiledProductProvider.notifier)
+                .setDetailedProduct(product);
+            context.push("/detailedProduct_page");
           },
           child: Container(
             decoration: BoxDecoration(
@@ -216,7 +219,10 @@ class ProductListBuilder extends ConsumerWidget {
         final product = products[index];
         return GestureDetector(
           onTap: () {
-            context.push("/detailedProduct_page", extra: product);
+            ref
+                .read(DeatiledProductProvider.notifier)
+                .setDetailedProduct(product);
+            context.push("/detailedProduct_page");
           },
           child: Container(
             margin: const EdgeInsets.only(bottom: 16.0),
@@ -261,7 +267,7 @@ class ProductListBuilder extends ConsumerWidget {
                             color: darkBlue,
                           ),
                           maxLines: 2,
-                          overflow: TextOverflow.ellipsis, 
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 6.0),
                         Text(

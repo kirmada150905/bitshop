@@ -4,11 +4,11 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class Review {
-  final int rating;
-  final String comment;
-  final DateTime date;
-  final String reviewerName;
-  final String reviewerEmail;
+  int rating;
+  String comment;
+  DateTime date;
+  String reviewerName;
+  String reviewerEmail;
 
   Review({
     required this.rating,
@@ -40,9 +40,9 @@ class Review {
 }
 
 class Dimensions {
-  final double width;
-  final double height;
-  final double depth;
+  double width;
+  double height;
+  double depth;
 
   Dimensions({
     required this.width,
@@ -68,28 +68,28 @@ class Dimensions {
 }
 
 class Product {
-  final int id;
-  final String title;
-  final String description;
-  final String category;
-  final double price;
-  final double discountPercentage;
-  final double rating;
-  final int stock;
-  final List<String> tags;
-  final String brand;
-  final String sku;
-  final double weight;
-  final Dimensions dimensions;
-  final String warrantyInformation;
-  final String shippingInformation;
-  final String availabilityStatus;
-  final List<Review> reviews;
-  final String returnPolicy;
-  final int minimumOrderQuantity;
-  final Map<String, dynamic> meta;
-  final List<String> images;
-  final String thumbnail;
+  int id;
+  String title;
+  String description;
+  String category;
+  double price;
+  double discountPercentage;
+  double rating;
+  int stock;
+  List<String> tags;
+  String brand;
+  String sku;
+  double weight;
+  Dimensions dimensions;
+  String warrantyInformation;
+  String shippingInformation;
+  String availabilityStatus;
+  List<Review> reviews;
+  String returnPolicy;
+  int minimumOrderQuantity;
+  Map<String, dynamic> meta;
+  List<String> images;
+  String thumbnail;
 
   Product({
     required this.id,
@@ -179,9 +179,9 @@ class Product {
 }
 
 class Category {
-  final String slug;
-  final String name;
-  final String url;
+  String slug;
+  String name;
+  String url;
   Category({
     required this.slug,
     required this.name,

@@ -1,54 +1,56 @@
 import 'package:bitshop/helpers/cart_manger.dart';
 import 'package:bitshop/helpers/models.dart';
+import 'package:bitshop/helpers/product_providers.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DetailedProductPage extends ConsumerWidget {
-  final Product product;
-
-  const DetailedProductPage({super.key, required this.product});
+  const DetailedProductPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: cream),
-        title: Text(
-          product.title,
-          style: TextStyle(color: cream),
-          softWrap: true,
-        ),
-        backgroundColor: darkBlue,
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ProductImageCarousel(images: product.images),
-            ProductInfoSection(product: product),
-            ActionButtons(
-                onAddToCart: () {
-                  User? user = FirebaseAuth.instance.currentUser;
-                  final cartManager = ref.read(cartManagerProvider);
-                  cartManager.addToCart(CartItem(
-                      id: product.id.toString(),
-                      title: product.title,
-                      thumbnail: product.thumbnail,
-                      price: product.price,
-                      quantity: 1));
-                },
-                onAddToWishlist: () {}),
-            Divider(color: Colors.grey),
-            ProductAdditionalDetails(product: product),
-            Divider(color: Colors.grey),
-            ProductReviewsSection(reviews: product.reviews),
-          ],
-        ),
-      ),
-    );
+    final product = ref.watch(DeatiledProductProvider);
+    return product != null
+        ? Scaffold(
+            appBar: AppBar(
+              iconTheme: IconThemeData(color: cream),
+              title: Text(
+                product.title,
+                style: TextStyle(color: cream),
+                softWrap: true,
+              ),
+              backgroundColor: darkBlue,
+            ),
+            body: SingleChildScrollView(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ProductImageCarousel(images: product.images),
+                  ProductInfoSection(product: product),
+                  ActionButtons(
+                      onAddToCart: () {
+                        User? user = FirebaseAuth.instance.currentUser;
+                        final cartManager = ref.read(cartManagerProvider);
+                        cartManager.addToCart(CartItem(
+                            id: product.id.toString(),
+                            title: product.title,
+                            thumbnail: product.thumbnail,
+                            price: product.price,
+                            quantity: 1));
+                      },
+                      onAddToWishlist: () {}),
+                  Divider(color: Colors.grey),
+                  ProductAdditionalDetails(product: product),
+                  Divider(color: Colors.grey),
+                  ProductReviewsSection(reviews: product.reviews),
+                ],
+              ),
+            ),
+          )
+        : Center(child: Text("Loadgig"));
   }
 }
 

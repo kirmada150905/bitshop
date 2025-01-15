@@ -161,38 +161,8 @@ class SellProductsPage extends ConsumerWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () async {
-                    String name = productNameController.text.trim();
-                    String price = productPriceController.text.trim();
-                    String description =
-                        productDescriptionController.text.trim();
-
-                    if (name.isNotEmpty &&
-                        price.isNotEmpty &&
-                        description.isNotEmpty) {
-                      print("Product Name: $name");
-                      print("Product Price: $price");
-                      print("Product Description: $description");
-                      await uploadProduct(
-                          name,
-                          price,
-                          description,
-                          (ref
-                              .read(ProductImageProvider.notifier)
-                              .giveImage()!));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Product submitted successfully!"),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Please fill in all fields."),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
+                    await uploadImage(
+                        (ref.read(ProductImageProvider.notifier).giveImage()!));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: darkBlue,

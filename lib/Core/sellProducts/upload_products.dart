@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 import 'dart:io';
 
@@ -7,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:bitshop/Core/pages/profileMangement/editProfile_page.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CustomProduct {
   String name;
@@ -82,33 +82,27 @@ class CustomProduct {
   }
 }
 
-Future<void> uploadProduct(
-    String name, String price, String description, File imageFile) async {
+Future<void> uploadImage(File file) async {
+  if (!file.existsSync()) {
+    print("Error: File does not exist at path: ${file.path}");
+    return;
+  }
+
   try {
-    // 1. Upload Image to Firebase Storage
     final storageRef = FirebaseStorage.instance.ref();
-    final imageRef =
-        storageRef.child('product_images/${DateTime.now().toIso8601String()}');
-    final uploadTask = await imageRef.putFile(imageFile);
-    final imageUrl = await imageRef.getDownloadURL();
-    final User? user = FirebaseAuth.instance.currentUser;
-    // 2. Save Product Data to Firestore
-    final product = CustomProduct(
-      name: name,
-      price: price,
-      description: description,
-      imageUrl: imageUrl,
-    );
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user?.uid)
-        .collection('uploaded_products')
-        .doc(product.name)
-        .set(product.toMap());
+    final fileName = (DateTime.now().millisecondsSinceEpoch).toString();
+    final fileRef = storageRef.child("images/$fileName.jpg");
 
-    print("Product uploaded successfully!");
+    if (file.existsSync()) {
+      print("File does exist at path: ${file.path}");
+    }
+
+    TaskSnapshot snapshot = await fileRef.putFile(file);
+
+    String downloadUrl = await snapshot.ref.getDownloadURL();
+    print("File uploaded successfully. Download URL: $downloadUrl");
   } catch (e) {
-    print("Error uploading product: $e");
+    print("Error uploading file: ${e.toString()}");
   }
 }
