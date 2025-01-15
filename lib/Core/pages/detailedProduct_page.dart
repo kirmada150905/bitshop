@@ -17,7 +17,7 @@ class DetailedProductPage extends ConsumerWidget {
             appBar: AppBar(
               iconTheme: IconThemeData(color: cream),
               title: Text(
-                product.title,
+                product.title!,
                 style: TextStyle(color: cream),
                 softWrap: true,
               ),
@@ -28,7 +28,7 @@ class DetailedProductPage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProductImageCarousel(images: product.images),
+                  ProductImageCarousel(images: product.images!),
                   ProductInfoSection(product: product),
                   ActionButtons(
                       onAddToCart: () {
@@ -36,16 +36,16 @@ class DetailedProductPage extends ConsumerWidget {
                         final cartManager = ref.read(cartManagerProvider);
                         cartManager.addToCart(CartItem(
                             id: product.id.toString(),
-                            title: product.title,
-                            thumbnail: product.thumbnail,
-                            price: product.price,
+                            title: product.title!,
+                            thumbnail: product.thumbnail!,
+                            price: product.price!,
                             quantity: 1));
                       },
                       onAddToWishlist: () {}),
                   Divider(color: Colors.grey),
                   ProductAdditionalDetails(product: product),
                   Divider(color: Colors.grey),
-                  ProductReviewsSection(reviews: product.reviews),
+                  ProductReviewsSection(reviews: product.reviews!),
                 ],
               ),
             ),
@@ -150,19 +150,19 @@ class ProductInfoSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            product.title,
+            product.title!,
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 8),
           Text(
-            product.description,
+            product.description!,
             style: TextStyle(fontSize: 16, color: Colors.grey[700]),
           ),
           SizedBox(height: 16),
           Row(
             children: [
               Text(
-                "\$${product.price.toStringAsFixed(2)}",
+                "\$${product.price?.toStringAsFixed(2)}",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -170,16 +170,16 @@ class ProductInfoSection extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 16),
-              if (product.discountPercentage > 0)
+              if (product.discountPercentage! > 0)
                 Text(
-                  "-${product.discountPercentage.toStringAsFixed(1)}% off",
+                  "-${product.discountPercentage!.toStringAsFixed(1)}% off",
                   style: TextStyle(color: Colors.green),
                 ),
             ],
           ),
           SizedBox(height: 8),
           Text(
-            "Rating: ${product.rating.toStringAsFixed(1)} ★",
+            "Rating: ${product.rating!.toStringAsFixed(1)} ★",
             style: TextStyle(fontSize: 16, color: Colors.orange),
           ),
         ],
@@ -272,7 +272,7 @@ class ProductAdditionalDetails extends StatelessWidget {
           Text("Brand: ${product.brand}"),
           Text("Stock: ${product.stock} available"),
           Text(
-            "Dimensions: ${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} cm",
+            "Dimensions: ${product.dimensions!.width} x ${product.dimensions!.height} x ${product.dimensions!.depth} cm",
           ),
           SizedBox(height: 8),
           Text("Warranty: ${product.warrantyInformation}"),
@@ -333,12 +333,12 @@ class ReviewCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              review.reviewerName,
+              review.reviewerName!,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4),
             Text(
-              review.comment,
+              review.comment!,
               style: TextStyle(color: Colors.grey[700]),
             ),
             SizedBox(height: 8),
@@ -348,7 +348,7 @@ class ReviewCard extends StatelessWidget {
             ),
             SizedBox(height: 4),
             Text(
-              "Reviewed on: ${review.date.toLocal().toString().split(' ')[0]}",
+              "Reviewed on: ${review.date!.toLocal().toString().split(' ')[0]}",
               style: TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ],

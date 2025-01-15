@@ -1,30 +1,27 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class Review {
-  int rating;
-  String comment;
-  DateTime date;
-  String reviewerName;
-  String reviewerEmail;
+  int? rating;
+  String? comment;
+  DateTime? date;
+  String? reviewerName;
+  String? reviewerEmail;
 
   Review({
-    required this.rating,
-    required this.comment,
-    required this.date,
-    required this.reviewerName,
-    required this.reviewerEmail,
+    this.rating,
+    this.comment,
+    this.date,
+    this.reviewerName,
+    this.reviewerEmail,
   });
 
   factory Review.fromMap(Map<String, dynamic> map) {
     return Review(
-      rating: map['rating'] as int,
-      comment: map['comment'] as String,
-      date: DateTime.parse(map['date'] as String),
-      reviewerName: map['reviewerName'] as String,
-      reviewerEmail: map['reviewerEmail'] as String,
+      rating: map['rating'] as int?,
+      comment: map['comment'] as String?,
+      date: map['date'] != null ? DateTime.tryParse(map['date'] as String) : null,
+      reviewerName: map['reviewerName'] as String?,
+      reviewerEmail: map['reviewerEmail'] as String?,
     );
   }
 
@@ -32,7 +29,7 @@ class Review {
     return {
       'rating': rating,
       'comment': comment,
-      'date': date.toIso8601String(),
+      'date': date?.toIso8601String(),
       'reviewerName': reviewerName,
       'reviewerEmail': reviewerEmail,
     };
@@ -40,21 +37,21 @@ class Review {
 }
 
 class Dimensions {
-  double width;
-  double height;
-  double depth;
+  double? width;
+  double? height;
+  double? depth;
 
   Dimensions({
-    required this.width,
-    required this.height,
-    required this.depth,
+    this.width,
+    this.height,
+    this.depth,
   });
 
   factory Dimensions.fromMap(Map<String, dynamic> map) {
     return Dimensions(
-      width: (map['width'] as num).toDouble(),
-      height: (map['height'] as num).toDouble(),
-      depth: (map['depth'] as num).toDouble(),
+      width: (map['width'] as num?)?.toDouble(),
+      height: (map['height'] as num?)?.toDouble(),
+      depth: (map['depth'] as num?)?.toDouble(),
     );
   }
 
@@ -68,80 +65,82 @@ class Dimensions {
 }
 
 class Product {
-  int id;
-  String title;
-  String description;
-  String category;
-  double price;
-  double discountPercentage;
-  double rating;
-  int stock;
-  List<String> tags;
-  String brand;
-  String sku;
-  double weight;
-  Dimensions dimensions;
-  String warrantyInformation;
-  String shippingInformation;
-  String availabilityStatus;
-  List<Review> reviews;
-  String returnPolicy;
-  int minimumOrderQuantity;
-  Map<String, dynamic> meta;
-  List<String> images;
-  String thumbnail;
+  int? id;
+  String? title;
+  String? description;
+  String? category;
+  double? price;
+  double? discountPercentage;
+  double? rating;
+  int? stock;
+  List<String>? tags;
+  String? brand;
+  String? sku;
+  double? weight;
+  Dimensions? dimensions;
+  String? warrantyInformation;
+  String? shippingInformation;
+  String? availabilityStatus;
+  List<Review>? reviews;
+  String? returnPolicy;
+  int? minimumOrderQuantity;
+  Map<String, dynamic>? meta;
+  List<String>? images;
+  String? thumbnail;
 
   Product({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.category,
-    required this.price,
-    required this.discountPercentage,
-    required this.rating,
-    required this.stock,
-    required this.tags,
-    required this.brand,
-    required this.sku,
-    required this.weight,
-    required this.dimensions,
-    required this.warrantyInformation,
-    required this.shippingInformation,
-    required this.availabilityStatus,
-    required this.reviews,
-    required this.returnPolicy,
-    required this.minimumOrderQuantity,
-    required this.meta,
-    required this.images,
-    required this.thumbnail,
+    this.id,
+    this.title,
+    this.description,
+    this.category,
+    this.price,
+    this.discountPercentage,
+    this.rating,
+    this.stock,
+    this.tags,
+    this.brand,
+    this.sku,
+    this.weight,
+    this.dimensions,
+    this.warrantyInformation,
+    this.shippingInformation,
+    this.availabilityStatus,
+    this.reviews,
+    this.returnPolicy,
+    this.minimumOrderQuantity,
+    this.meta,
+    this.images,
+    this.thumbnail,
   });
 
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      id: map['id'] as int,
-      title: map['title'] as String,
-      description: map['description'] as String,
-      category: map['category'] as String,
-      price: (map['price'] as num).toDouble(),
-      discountPercentage: (map['discountPercentage'] as num).toDouble(),
-      rating: (map['rating'] as num).toDouble(),
-      stock: map['stock'] as int,
-      tags: List<String>.from(map['tags'] as List),
-      brand: map['brand'] as String,
-      sku: map['sku'] as String,
-      weight: (map['weight'] as num).toDouble(),
-      dimensions: Dimensions.fromMap(map['dimensions'] as Map<String, dynamic>),
-      warrantyInformation: map['warrantyInformation'] as String,
-      shippingInformation: map['shippingInformation'] as String,
-      availabilityStatus: map['availabilityStatus'] as String,
-      reviews: (map['reviews'] as List)
-          .map((review) => Review.fromMap(review as Map<String, dynamic>))
+      id: map['id'] as int?,
+      title: map['title'] as String?,
+      description: map['description'] as String?,
+      category: map['category'] as String?,
+      price: (map['price'] as num?)?.toDouble(),
+      discountPercentage: (map['discountPercentage'] as num?)?.toDouble(),
+      rating: (map['rating'] as num?)?.toDouble(),
+      stock: map['stock'] as int?,
+      tags: (map['tags'] as List?)?.cast<String>(),
+      brand: map['brand'] as String?,
+      sku: map['sku'] as String?,
+      weight: (map['weight'] as num?)?.toDouble(),
+      dimensions: map['dimensions'] != null
+          ? Dimensions.fromMap(map['dimensions'] as Map<String, dynamic>)
+          : null,
+      warrantyInformation: map['warrantyInformation'] as String?,
+      shippingInformation: map['shippingInformation'] as String?,
+      availabilityStatus: map['availabilityStatus'] as String?,
+      reviews: (map['reviews'] as List?)
+          ?.map((review) => Review.fromMap(review as Map<String, dynamic>))
           .toList(),
-      returnPolicy: map['returnPolicy'] as String,
-      minimumOrderQuantity: map['minimumOrderQuantity'] as int,
-      meta: Map<String, dynamic>.from(map['meta'] as Map),
-      images: List<String>.from(map['images'] as List),
-      thumbnail: map['thumbnail'] as String,
+      returnPolicy: map['returnPolicy'] as String?,
+      minimumOrderQuantity: map['minimumOrderQuantity'] as int?,
+      meta: map['meta'] != null ? Map<String, dynamic>.from(map['meta']) : null,
+      images: (map['images'] as List?)?.cast<String>(),
+      thumbnail: map['thumbnail'] as String?,
     );
   }
 
@@ -159,11 +158,11 @@ class Product {
       'brand': brand,
       'sku': sku,
       'weight': weight,
-      'dimensions': dimensions.toMap(),
+      'dimensions': dimensions?.toMap(),
       'warrantyInformation': warrantyInformation,
       'shippingInformation': shippingInformation,
       'availabilityStatus': availabilityStatus,
-      'reviews': reviews.map((review) => review.toMap()).toList(),
+      'reviews': reviews?.map((review) => review.toMap()).toList(),
       'returnPolicy': returnPolicy,
       'minimumOrderQuantity': minimumOrderQuantity,
       'meta': meta,
@@ -179,13 +178,14 @@ class Product {
 }
 
 class Category {
-  String slug;
-  String name;
-  String url;
+  String? slug;
+  String? name;
+  String? url;
+
   Category({
-    required this.slug,
-    required this.name,
-    required this.url,
+    this.slug,
+    this.name,
+    this.url,
   });
 
   Category copyWith({
@@ -201,7 +201,7 @@ class Category {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'slug': slug,
       'name': name,
       'url': url,
@@ -210,9 +210,9 @@ class Category {
 
   factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
-      slug: map['slug'] as String,
-      name: map['name'] as String,
-      url: map['url'] as String,
+      slug: map['slug'] as String?,
+      name: map['name'] as String?,
+      url: map['url'] as String?,
     );
   }
 
@@ -220,17 +220,4 @@ class Category {
 
   factory Category.fromJson(String source) =>
       Category.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'Category(slug: $slug, name: $name, url: $url)';
-
-  @override
-  bool operator ==(covariant Category other) {
-    if (identical(this, other)) return true;
-
-    return other.slug == slug && other.name == name && other.url == url;
-  }
-
-  @override
-  int get hashCode => slug.hashCode ^ name.hashCode ^ url.hashCode;
 }

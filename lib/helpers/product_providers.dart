@@ -107,7 +107,6 @@ final categorySlugsProvider = FutureProvider<List<String>>((ref) async {
         final products = List.from(data['products']);
         if (products.isNotEmpty) {
           validSlugs.add(slug);
-          print(validSlugs);
         }
       }
     } catch (e) {
