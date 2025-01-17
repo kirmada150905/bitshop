@@ -89,7 +89,44 @@ final exploreProductsProvider = FutureProvider<List<Product>>((ref) async {
 });
 
 final categorySlugsProvider = FutureProvider<List<String>>((ref) async {
+  // Fetch the category slugs from the server
   Response response = await dio.get("${server}/products/category-list");
   List<String> categorySlugs = List<String>.from(response.data as List);
-  return categorySlugs;
+
+  // Filter valid slugs by checking products for each slug
+  List<String> validSlugs = [];
+  for (final slug in categorySlugs) {
+    try {
+      final productsResponse =
+          await dio.get("${server}/products/category/$slug");
+      // print(("${server}/products?category=$slug"));
+
+      // Handle the response structure appropriately
+      final data = productsResponse.data;
+      if (data is Map<String, dynamic> && data.containsKey('products')) {
+        final products = List.from(data['products']);
+        if (products.isNotEmpty) {
+          validSlugs.add(slug);
+        }
+      }
+    } catch (e) {
+      // Handle errors gracefully (e.g., network issues or unexpected response structure)
+      print("Error fetching products for slug $slug: $e");
+    }
+  }
+
+  return validSlugs;
+});
+
+class DetailedProductNotifier extends StateNotifier<Product?> {
+  DetailedProductNotifier() : super(null);
+
+  void setDetailedProduct(Product product) {
+    state = product;
+  }
+}
+
+final DeatiledProductProvider =
+    StateNotifierProvider<DetailedProductNotifier, Product?>((ref) {
+  return DetailedProductNotifier();
 });

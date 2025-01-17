@@ -54,7 +54,7 @@ class CategoriesCarousel extends ConsumerWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Image.network(
-                            category.thumbnail,
+                            category.thumbnail!,
                             fit: BoxFit.contain,
                             width: MediaQuery.of(context).size.width * 0.7,
                             height: MediaQuery.of(context).size.height * 0.3,
@@ -67,7 +67,7 @@ class CategoriesCarousel extends ConsumerWidget {
                         right: 15.0,
                         child: Center(
                           child: Text(
-                            category.category.toUpperCase(),
+                            category.category!.toUpperCase(),
                             style: TextStyle(
                               color: darkBlue,
                               fontSize: 16.0,
@@ -122,9 +122,13 @@ class ProductGridBuilder extends ConsumerWidget {
         final product = products[index];
         return GestureDetector(
           onTap: () {
-            context.push("/detailedProduct_page", extra: product);
+            ref
+                .read(DeatiledProductProvider.notifier)
+                .setDetailedProduct(product);
+            context.push("/detailedProduct_page");
           },
           child: Container(
+            padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
               color: cream,
               borderRadius: BorderRadius.circular(12.0),
@@ -146,7 +150,7 @@ class ProductGridBuilder extends ConsumerWidget {
                       top: Radius.circular(12.0),
                     ),
                     child: Image.network(
-                      product.thumbnail,
+                      product.thumbnail!,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -157,7 +161,7 @@ class ProductGridBuilder extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        product.title,
+                        product.title!,
                         style: TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold,
@@ -168,7 +172,7 @@ class ProductGridBuilder extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        '\$${product.price.toStringAsFixed(2)}',
+                        '\$${product.price?.toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
@@ -182,7 +186,7 @@ class ProductGridBuilder extends ConsumerWidget {
                           (starIndex) => Icon(
                             Icons.star,
                             size: 14.0,
-                            color: starIndex < product.rating
+                            color: starIndex < product.rating!
                                 ? Colors.amber
                                 : Colors.grey.shade300,
                           ),
@@ -216,7 +220,10 @@ class ProductListBuilder extends ConsumerWidget {
         final product = products[index];
         return GestureDetector(
           onTap: () {
-            context.push("/detailedProduct_page", extra: product);
+            ref
+                .read(DeatiledProductProvider.notifier)
+                .setDetailedProduct(product);
+            context.push("/detailedProduct_page");
           },
           child: Container(
             margin: const EdgeInsets.only(bottom: 16.0),
@@ -240,7 +247,7 @@ class ProductListBuilder extends ConsumerWidget {
                     left: Radius.circular(12.0),
                   ),
                   child: Image.network(
-                    product.thumbnail,
+                    product.thumbnail!,
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width * 0.4,
                     height: 120.0,
@@ -254,18 +261,18 @@ class ProductListBuilder extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          product.title,
+                          product.title!,
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                             color: darkBlue,
                           ),
                           maxLines: 2,
-                          overflow: TextOverflow.ellipsis, 
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 6.0),
                         Text(
-                          '\$${product.price.toStringAsFixed(2)}',
+                          '\$${product.price?.toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
@@ -279,7 +286,7 @@ class ProductListBuilder extends ConsumerWidget {
                             (starIndex) => Icon(
                               Icons.star,
                               size: 14.0,
-                              color: starIndex < product.rating
+                              color: starIndex < product.rating!
                                   ? Colors.amber
                                   : Colors.grey.shade300,
                             ),
@@ -287,7 +294,7 @@ class ProductListBuilder extends ConsumerWidget {
                         ),
                         const SizedBox(height: 6.0),
                         Text(
-                          product.description,
+                          product.description!,
                           style: TextStyle(
                             fontSize: 12.0,
                             color: Colors.grey.shade600,
@@ -346,7 +353,7 @@ class HorizontalProductListBuilder extends ConsumerWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      product.thumbnail,
+                      product.thumbnail!,
                       width: double.infinity,
                       height: 80.0,
                       fit: BoxFit.cover,
@@ -365,7 +372,7 @@ class HorizontalProductListBuilder extends ConsumerWidget {
                   const SizedBox(height: 8.0),
                   // Title
                   Text(
-                    product.title,
+                    product.title!,
                     style: const TextStyle(
                       fontSize: 12.0,
                       fontWeight: FontWeight.bold,
@@ -377,7 +384,7 @@ class HorizontalProductListBuilder extends ConsumerWidget {
                   const SizedBox(height: 4.0),
                   // Price
                   Text(
-                    '\$${product.price.toStringAsFixed(2)}',
+                    '\$${product.price?.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontSize: 12.0,
                       fontWeight: FontWeight.bold,
@@ -392,7 +399,7 @@ class HorizontalProductListBuilder extends ConsumerWidget {
                       (starIndex) => Icon(
                         Icons.star,
                         size: 12.0,
-                        color: starIndex < product.rating
+                        color: starIndex < product.rating!
                             ? Colors.amber
                             : Colors.grey.shade300,
                       ),

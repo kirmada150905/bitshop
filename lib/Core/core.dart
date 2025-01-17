@@ -2,6 +2,8 @@ import 'package:bitshop/Core/pages/base_page.dart';
 import 'package:bitshop/Core/pages/cart_page.dart';
 import 'package:bitshop/Core/pages/explore_page.dart';
 import 'package:bitshop/Core/pages/profileMangement/profile_page.dart';
+import 'package:bitshop/Core/pages/wishlist/wishList_page.dart';
+import 'package:bitshop/Core/sellProducts/sellProducts_page.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +23,8 @@ class _CoreState extends ConsumerState {
       BasePage(),
       ExplorePage(),
       CartPage(),
-      ProfilePage()
+      WishlistScreen(),
+      ProfilePage(),
     ];
     return Scaffold(
         bottomNavigationBar: NavigationBar(
@@ -80,6 +83,21 @@ class _CoreState extends ConsumerState {
               label: "Cart",
               selectedIcon: Icon(
                 Icons.shopping_cart,
+                size: 32,
+                color: darkBlue,
+              ),
+            ),
+            NavigationDestination(
+              icon: Tooltip(
+                message: "Wish List",
+                child: Icon(
+                  Icons.favorite_border,
+                  size: 28,
+                ),
+              ),
+              label: "Cart",
+              selectedIcon: Icon(
+                Icons.favorite,
                 size: 32,
                 color: darkBlue,
               ),

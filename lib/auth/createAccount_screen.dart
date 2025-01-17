@@ -1,8 +1,9 @@
+import 'package:bitshop/Auth/auth_widgets.dart';
 import 'package:bitshop/Auth/emailAuth.dart';
 import 'package:bitshop/Auth/googleAuth.dart';
+import 'package:bitshop/Auth/login_screen.dart';
 import 'package:bitshop/helpers/horizontalORline.dart';
 import 'package:bitshop/styles/colors.dart';
-import 'package:bitshop/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -122,41 +123,6 @@ class CreateAccountScreen extends ConsumerWidget {
                 )
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LoginField extends StatelessWidget {
-  final String hint;
-  final TextEditingController controller;
-  const LoginField({super.key, required this.hint, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        label: Text(hint, style: textFieldTextStyle),
-        hintText: "Enter your $hint",
-        hintStyle: TextStyle(
-          fontSize: 20,
-          color: lightBlue,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(
-            color: lightBlue,
-            width: 1.5,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(
-            color: darkBlue,
-            width: 2,
           ),
         ),
       ),

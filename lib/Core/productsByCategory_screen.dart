@@ -41,41 +41,53 @@ class ProductsByCategoryScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        overlayColor: Colors.white,
-                        side: BorderSide(width: 0.5, color: darkBlue),
-                        elevation: 2,
-                        shadowColor: Colors.white,
-                        backgroundColor: darkBlue,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.sort,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            "Filters",
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ),
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //     overlayColor: Colors.white,
+                    //     side: BorderSide(width: 0.5, color: darkBlue),
+                    //     elevation: 2,
+                    //     shadowColor: Colors.white,
+                    //     backgroundColor: darkBlue,
+                    //     padding: EdgeInsets.symmetric(
+                    //         horizontal: 8.0, vertical: 0.0),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //     ),
+                    //   ),
+                    //   onPressed: () {
+                    //     showModalBottomSheet(
+                    //         context: context,
+                    //         builder: (context) {
+                    //           return Center(
+                    //             child: ElevatedButton(
+                    //                 onPressed: () {
+                    //                 },
+                    //                 child: Text("Price low-high")),
+                    //           );
+                    //         });
+                    //   },
+                    //   child: Row(
+                    //     mainAxisSize: MainAxisSize.min,
+                    //     children: [
+                    //       Icon(
+                    //         Icons.sort,
+                    //         color: Colors.white,
+                    //       ),
+                    //       Text(
+                    //         "Filters",
+                    //         style: TextStyle(
+                    //             fontSize: 13,
+                    //             color: Colors.white,
+                    //             fontWeight: FontWeight.w500),
+                    //       ),
+                    //       Icon(
+                    //         Icons.arrow_drop_down,
+                    //         color: Colors.white,
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+
                     ProductListBuilder(products: products),
                   ],
                 ),
