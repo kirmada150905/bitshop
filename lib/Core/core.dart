@@ -2,6 +2,7 @@ import 'package:bitshop/Core/pages/base_page.dart';
 import 'package:bitshop/Core/pages/cart_page.dart';
 import 'package:bitshop/Core/pages/explore_page.dart';
 import 'package:bitshop/Core/pages/profileMangement/profile_page.dart';
+import 'package:bitshop/Core/pages/wishlist/wishList_page.dart';
 import 'package:bitshop/Core/sellProducts/sellProducts_page.dart';
 import 'package:bitshop/styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _CoreState extends ConsumerState {
       BasePage(),
       ExplorePage(),
       CartPage(),
-      SellProductsPage(),
+      WishlistScreen(),
       ProfilePage(),
     ];
     return Scaffold(
@@ -88,15 +89,15 @@ class _CoreState extends ConsumerState {
             ),
             NavigationDestination(
               icon: Tooltip(
-                message: "Sell",
+                message: "Wish List",
                 child: Icon(
-                  Icons.attach_money,
+                  Icons.favorite_border,
                   size: 28,
                 ),
               ),
               label: "Cart",
               selectedIcon: Icon(
-                Icons.attach_money_outlined,
+                Icons.favorite,
                 size: 32,
                 color: darkBlue,
               ),

@@ -1,3 +1,5 @@
+import 'package:bitshop/Core/pages/wishlist/wishList_model.dart';
+import 'package:bitshop/Core/pages/wishlist/wishList_providers.dart';
 import 'package:bitshop/helpers/cart_manger.dart';
 import 'package:bitshop/helpers/models.dart';
 import 'package:bitshop/helpers/product_providers.dart';
@@ -12,6 +14,7 @@ class DetailedProductPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final product = ref.watch(DeatiledProductProvider);
+    final cart = ref.watch(cartManagerProvider);
     return product != null
         ? Scaffold(
             appBar: AppBar(
@@ -31,17 +34,42 @@ class DetailedProductPage extends ConsumerWidget {
                   ProductImageCarousel(images: product.images!),
                   ProductInfoSection(product: product),
                   ActionButtons(
-                      onAddToCart: () {
-                        User? user = FirebaseAuth.instance.currentUser;
-                        final cartManager = ref.read(cartManagerProvider);
-                        cartManager.addToCart(CartItem(
+                    onAddToCart: () async {
+                      User? user = FirebaseAuth.instance.currentUser;
+                      final cartManager = ref.read(cartManagerProvider);
+                      cartManager.addToCart(CartItem(
+                          id: product.id.toString(),
+                          title: product.title!,
+                          thumbnail: product.thumbnail!,
+                          price: product.price!,
+                          quantity: 1));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("added to cart")));
+                    },
+                    onAddToWishlist: () {
+                      final wishlistNotifier =
+                          ref.read(wishlistProvider.notifier);
+                      final isInWishlist = ref
+                          .watch(wishlistProvider)
+                          .any((item) => item.id == product.id);
+
+                      if (isInWishlist) {
+                        wishlistNotifier
+                            .removeFromWishlist(product.id.toString());
+                      } else {
+                        wishlistNotifier.addToWishlist(
+                          WishlistItem(
                             id: product.id.toString(),
+                            image: product.thumbnail!,
                             title: product.title!,
-                            thumbnail: product.thumbnail!,
                             price: product.price!,
-                            quantity: 1));
-                      },
-                      onAddToWishlist: () {}),
+                          ),
+                        );
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("added to wish list")));
+                    },
+                  ),
                   Divider(color: Colors.grey),
                   ProductAdditionalDetails(product: product),
                   Divider(color: Colors.grey),
@@ -188,69 +216,6 @@ class ProductInfoSection extends StatelessWidget {
   }
 }
 
-class ActionButtons extends StatelessWidget {
-  final VoidCallback onAddToCart;
-  final VoidCallback onAddToWishlist;
-  final bool isInCart;
-  final bool isInWishlist;
-
-  const ActionButtons({
-    Key? key,
-    required this.onAddToCart,
-    required this.onAddToWishlist,
-    this.isInCart = false,
-    this.isInWishlist = false,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ElevatedButton.icon(
-          onPressed: onAddToCart,
-          icon: Icon(
-            isInCart ? Icons.shopping_cart : Icons.add_shopping_cart,
-            color: cream,
-          ),
-          label: Text(
-            isInCart ? 'In Cart' : 'Add to Cart',
-            style: TextStyle(color: cream),
-          ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: isInCart ? Colors.green : darkBlue,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-        OutlinedButton.icon(
-          onPressed: onAddToWishlist,
-          icon: Icon(
-            isInWishlist ? Icons.favorite : Icons.favorite_border,
-            color: isInWishlist ? Colors.red : darkBlue,
-          ),
-          label: Text(
-            isInWishlist ? 'In Wishlist' : 'Wishlist',
-            style: TextStyle(
-              color: isInWishlist ? Colors.red : darkBlue,
-            ),
-          ),
-          style: OutlinedButton.styleFrom(
-            side: BorderSide(
-              color: isInWishlist ? Colors.red : darkBlue,
-              width: 1.5,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class ProductAdditionalDetails extends StatelessWidget {
   final Product product;
 
@@ -354,6 +319,71 @@ class ReviewCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ActionButtons extends StatelessWidget {
+  final VoidCallback onAddToCart;
+  final VoidCallback onAddToWishlist;
+  final bool isInCart;
+  final bool isInWishlist;
+
+  const ActionButtons({
+    Key? key,
+    required this.onAddToCart,
+    required this.onAddToWishlist,
+    this.isInCart = false,
+    this.isInWishlist = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton.icon(
+          onPressed: () {
+            onAddToCart();
+          },
+          icon: Icon(
+            isInCart ? Icons.shopping_cart : Icons.add_shopping_cart,
+            color: cream,
+          ),
+          label: Text(
+            isInCart ? 'In Cart' : 'Add to Cart',
+            style: TextStyle(color: cream),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: isInCart ? Colors.green : darkBlue,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+        OutlinedButton.icon(
+          onPressed: onAddToWishlist,
+          icon: Icon(
+            isInWishlist ? Icons.favorite : Icons.favorite_border,
+            color: isInWishlist ? Colors.red : darkBlue,
+          ),
+          label: Text(
+            isInWishlist ? 'In Wishlist' : 'Wishlist',
+            style: TextStyle(
+              color: isInWishlist ? Colors.red : darkBlue,
+            ),
+          ),
+          style: OutlinedButton.styleFrom(
+            side: BorderSide(
+              color: isInWishlist ? Colors.red : darkBlue,
+              width: 1.5,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

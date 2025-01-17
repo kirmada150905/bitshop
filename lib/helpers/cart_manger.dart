@@ -56,10 +56,8 @@ class CartItem {
 }
 
 class CartManager {
-
   final String? userId = FirebaseAuth.instance.currentUser?.uid ?? "";
   CartManager();
-
 
   CollectionReference get _cartCollection => FirebaseFirestore.instance
       .collection('users')
@@ -94,6 +92,18 @@ class CartManager {
 
   Future<void> removeFromCart(String itemId) async {
     await _cartCollection.doc(itemId).delete();
+  }
+
+  Future<bool> isInCart(String itemId) async {
+    final docRef = _cartCollection.doc(itemId);
+    final existingItem = await docRef.get();
+
+    if (existingItem.exists) {
+      final currentQuantity = existingItem['quantity'];
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<void> clearCart() async {

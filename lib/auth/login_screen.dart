@@ -15,8 +15,8 @@ class LoginScreen extends ConsumerWidget {
   final TextEditingController _passController = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    _emailController.text = "mohan.krishna.dt@gmail.com";
-    _passController.text = "password";
+    // _emailController.text = "mohan.krishna.dt@gmail.com";
+    // _passController.text = "password";
     return Scaffold(
       body: Center(
         child: Padding(

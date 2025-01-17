@@ -1,7 +1,7 @@
 import 'package:bitshop/Auth/createAccount_screen.dart';
 import 'package:bitshop/Auth/login_screen.dart';
 import 'package:bitshop/Core/core.dart';
-import 'package:bitshop/Core/pages/checkout_page.dart';
+import 'package:bitshop/Core/pages/wishlist/checkout_page.dart';
 import 'package:bitshop/Core/pages/tawkTo_page.dart';
 import 'package:bitshop/Core/pages/detailedProduct_page.dart';
 import 'package:bitshop/Core/pages/profileMangement/editProfile_page.dart';
